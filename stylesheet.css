@@ -1,29 +1,40 @@
 :root {
 	--ff-primary: '';
 
-	--clr-bg: #000000;
+	--clr-bg: #279186;
 }
 
-
+body {
+	background-color: var(--clr-bg);
+	margin: 5%;
+}
 
 .content {
 	display: grid;
 	grid-template-areas: "gridOne gridTwo gridThree";
+	grid-column-gap: 10px;
+	width: 100%;
 }
 
 .gridOne {
 	overflow: hidden;
 	grid-area: gridOne;
 	border: solid 1px black;
+	background-color: white;
+	width: 100%;
 }
 
 .gridTwo {
 	overflow: hidden;
 	grid-area: gridTwo;
+	background-color: #E0FCFA;
+	width: 100%;
 }
 
 .gridThree {
 	overflow: hidden;
 	grid-area: gridThree;
 	border: solid 1px black;
+	background-color: white;
+	width: 100%;
 }
