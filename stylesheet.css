@@ -3,3 +3,27 @@
 
 	--clr-bg: #000000;
 }
+
+
+
+.content {
+	display: grid;
+	grid-template-areas: "gridOne gridTwo gridThree";
+}
+
+.gridOne {
+	overflow: hidden;
+	grid-area: gridOne;
+	border: solid 1px black;
+}
+
+.gridTwo {
+	overflow: hidden;
+	grid-area: gridTwo;
+}
+
+.gridThree {
+	overflow: hidden;
+	grid-area: gridThree;
+	border: solid 1px black;
+}
