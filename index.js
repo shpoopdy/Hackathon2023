@@ -96,11 +96,11 @@ function pageLoad() {
 	message = getRandomElem(quotes);
 	messageChars = removePunctuation(message);
 	
-	let cipher = encipher(messageChars, key);
+	const cipher = encipher(messageChars, key);
 	
-	guessKey(cipher, "bench"); // temp
+	//guessKey(cipher, "bench"); // temp
 	
-	clickLetter(cipher, "bench", 0) //temp
+	//clickLetter(cipher, "bench", 0) //temp
 }
 
 const guessRows = [
@@ -143,6 +143,8 @@ let currentRow = 0;
 let currentTile = 0;
 
 document.addEventListener("keypress", function(event) {
+	
+	
 	let tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
 	if (event.key === "Enter") {
 		let wordGuessed = phraseKey.value;
@@ -155,5 +157,8 @@ document.addEventListener("keypress", function(event) {
 		currentTile = 0;
 		currentRow++;
 	}
+	
+	guessKey(cipher, wordGuessed)
+	
 });
 window.addEventListener("load", pageLoad, false);

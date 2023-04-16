@@ -7,21 +7,38 @@
 body {
 	background-color: var(--clr-bg);
 	margin: 5%;
+	font-family: sans-serif;
 }
 
 .content {
 	display: grid;
 	grid-template-areas: "gridOne gridTwo gridThree";
-	grid-column-gap: 10px;
+	grid-column-gap: 15px;
 	width: 100%;
 }
 
 #gridOne {
 	overflow: hidden;
 	grid-area: gridOne;
-	border: solid 1px black;
+	border: solid 2px #279186;
+	border-radius: 20px;
 	background-color: white;
 	width: 100%;
+}
+
+#message, #subHeading1 {
+	padding: 15px;
+	padding-top: 5px;
+}
+
+#subHeading1 {
+	padding-bottom: 0px;
+}
+
+#message {
+	padding-top: 0px;
+	font-size: 18px;
+	font-family: monospace;
 }
 
 #gridTwo {
@@ -31,10 +48,18 @@ body {
 	width: 100%;
 }
 
+#keyInput {
+	padding: 7px;
+	border-radius: 7px;
+	border: solid 2px #279186;
+	margin-bottom: 5px;
+}
+
 #gridThree {
 	overflow: hidden;
 	grid-area: gridThree;
-	border: solid 1px black;
+	border: solid 2px #279186;
+	border-radius: 20px;
 	background-color: white;
 	width: 100%;
 }
@@ -44,12 +69,19 @@ body {
 }
 
 .tile-container .tile {
+	background-color: white;
 	width: 62px;
 	height: 62px;
-	border: 2px solid#3a3a3c;
+	border: 2px solid #279186;
+	border-radius: 15px;
 	box-sizing: border-box;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin: 2px;
+}
+
+.tile-container .tile:hover {
+	background-color: #EDEFEE;
+	border-width: 3px;
 }
