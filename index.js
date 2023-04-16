@@ -2,6 +2,7 @@
 const submitBtn = document.querySelector('input[type="submit"]');
 const tileDisplay = document.querySelector(".tile-container");
 const phraseKey = document.querySelector("#keyInput");
+let cipher = "";
 let currentRow = 0;
 let currentTile = 0;
 
@@ -16,8 +17,6 @@ function removePunctuation(string) {
 }
 
 function encipher(messageChars, key) {
-	let cipher = "";
-	
 	keyIndex = 0;
 	
 	for (let i = 0; i < messageChars.length; i++) {
@@ -49,14 +48,16 @@ function decipher(cipherChars, keyGuess) {
 	return message;
 }
 
-function guessKey(cipher, keyGuess) {
+function guessKey(e) {
+	e.preventDefault();
+	keyGuess = document.getElementById("keyInput").value;
 	if (keyGuess.toLowerCase() == key) {
 		alert("You Won!");
 	}
 	
 	if (words.includes(keyGuess)) {
+		createRow();
 		messageGuess = decipher(cipher, keyGuess);
-		console.log(messageGuess);
 	}
 	else {
 		alert("Guesses must be dictionary words");
@@ -123,8 +124,8 @@ guessRows.forEach((guessRow, guessRowIndex) => {
 	tileDisplay.append(rowElement);
 })
 	*/
-function createRow(e) {
-	e.preventDefault();
+function createRow() {
+	//e.preventDefault();
 	let wordGuessed = phraseKey.value;
 	const rowArray = [];
 	const rowElement = document.createElement("div");
@@ -187,4 +188,4 @@ document.addEventListener("keypress", function(event) {
 }); */
 
 window.addEventListener("load", pageLoad, false);
-submitBtn.addEventListener("click", createRow);
+submitBtn.addEventListener("click", guessKey);
