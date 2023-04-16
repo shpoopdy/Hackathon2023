@@ -26,12 +26,13 @@ h1 {
 	margin-bottom: 8px;
 }
 
+/*
 .content {
 	display: grid;
 	grid-template-areas: "gridOne gridTwo gridThree";
 	grid-column-gap: 30px;
 	width: 100%;
-}
+}*/
 
 #gridOne {
 	overflow: hidden;
@@ -39,7 +40,9 @@ h1 {
 	border: solid 2px #279186;
 	border-radius: 20px;
 	background-color: white;
-	width: 100%;
+	max-width: 500px;
+	float: left;
+	margin-right: 30px;
 }
 
 #message, #subHeading1 {
@@ -62,7 +65,8 @@ h1 {
 	overflow: hidden;
 	grid-area: gridTwo;
 	background-color: #E0FCFA;
-	width: 100%;
+	float: left;
+	margin-right: 30px;
 }
 
 #keyInput {
@@ -93,7 +97,7 @@ h1 {
 	border: solid 2px #279186;
 	border-radius: 20px;
 	background-color: white;
-	width: 100%;
+	float: left;
 }
 
 .tile-container div {
