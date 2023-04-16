@@ -56,7 +56,7 @@ function decipher(cipherChars, keyGuess) {
 
 function guessKey(e) {
 	e.preventDefault();
-	keyGuess = document.getElementById("keyInput").value;
+	keyGuess = document.getElementById("keyInput").value.toLowerCase();
 	keyGuesses.push(keyGuess);
 	if (keyGuess.toLowerCase() == key) {
 		document.getElementById("message").innerHTML = messageSpaces;
@@ -78,7 +78,7 @@ function guessKey(e) {
 	}
 }
 
-function clickLetter(event) {//keyGuess, index) {
+function clickLetter(event) {
 	let id = event.target.id;
 	console.log(id)
 	
@@ -122,7 +122,7 @@ function clickLetter(event) {//keyGuess, index) {
 		
 		let col2 = parseFloat(letterCount[alphabet[i]] / totalLetters * 100).toFixed(2) + "%";
 		if (isNaN(letterCount[alphabet[i]])) {
-			col2 = 0;
+			col2 = "0.00%";
 		}
 		tdTwo.innerHTML = col2;
 		tableRow.append(tdOne);
@@ -146,7 +146,7 @@ function pageLoad() {
 
 function createRow() {
 	//e.preventDefault();
-	let wordGuessed = phraseKey.value;
+	let wordGuessed = phraseKey.value.toLowerCase();
 	const rowArray = [];
 	const rowElement = document.createElement("div");
 	rowElement.setAttribute("id", "guessRow-" + currentRow);
