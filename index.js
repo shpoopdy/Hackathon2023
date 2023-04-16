@@ -8,6 +8,7 @@ let messageSpaces = "";
 let currentRow = 0;
 let currentTile = 0;
 let attempts = 0;
+let keyGuesses = [];
 
 
 function getRandomElem(array) {
@@ -56,6 +57,7 @@ function decipher(cipherChars, keyGuess) {
 function guessKey(e) {
 	e.preventDefault();
 	keyGuess = document.getElementById("keyInput").value;
+	keyGuesses.push(keyGuess);
 	if (keyGuess.toLowerCase() == key) {
 		document.getElementById("message").innerHTML = messageSpaces;
 		createRow();
@@ -76,16 +78,28 @@ function guessKey(e) {
 	}
 }
 
-function clickLetter(keyGuess, index) {
+function clickLetter(event) {//keyGuess, index) {
+	let id = event.target.id;
+	console.log(id)
+	
+	let index = Number(id[id.length - 1])
+	let keyIndex = id[9]
+	let keyGuess = keyGuesses[keyIndex]
+	console.log("keyGuess", keyGuess)
+	console.log("index",index)
+	
+	
 	let letterCount = {};
 	
 	totalLetters = 0;
 	
 	alphabet = "abcdefghijklmnopqrstuvwxyz";
-	substitution = decipher(alphabet, keyGuess);
+	substitution = decipher(alphabet, keyGuess[index]);
 	
 	cipherIndex = index;
+	console.log(cipherIndex)
 	while (cipherIndex < cipher.length) {
+		console.log(cipherIndex)
 		totalLetters += 1;
 		if (cipher[cipherIndex] in letterCount) {
 			letterCount[cipher[cipherIndex]] += 1;
@@ -126,7 +140,7 @@ function pageLoad() {
 	messageSpaces = getRandomElem(quotes);
 	messageChars = removePunctuation(messageSpaces);
 	
-	const cipher = encipher(messageChars, key);
+	cipher = encipher(messageChars, key);
 	
 }
 
@@ -141,7 +155,7 @@ function createRow() {
 		tileElement.setAttribute("id", "guessRow-" + currentRow + "-tile-" + currentTile);
 		tileElement.classList.add("tile");
 		tileElement.innerHTML = wordGuessed[i];
-		tileElement.addEventListener("click", () => { clickLetter(wordGuessed, currentTile)});
+		tileElement.addEventListener("click", clickLetter, false);
 		rowElement.append(tileElement);
 		currentTile++;
 	}
