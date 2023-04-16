@@ -13,5 +13,5 @@ const quotes = [
 "You only live once, but if you do it right, once is enough. ―Mae West",
 "Life imposes things on you that you can't control, but you still have the choice of how you're going to live through this. —Celine Dion",
 "Life is ten percent what happens to you and ninety percent how you respond to it. —Charles Swindoll",
-"Life would be tragic if it weren't funny. — Stephen Hawking"
+"Life would be tragic if it weren't funny. —Stephen Hawking"
 ]

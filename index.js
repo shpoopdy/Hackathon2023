@@ -18,7 +18,7 @@ function getRandomElem(array) {
 }
 
 function removePunctuation(string) {
-	return string.replace(/[.,-;]/g,"").replace(/\s/g,"").toLowerCase();
+	return string.replace(/[.,-;'"]/g,"").replace(/\s/g,"").toLowerCase();
 }
 
 function encipher(messageChars, key) {
@@ -101,13 +101,8 @@ function displayCipher(keyGuess, keyIndex) {
 	messageGuessSpaces = addSpaces(messageGuess, keyGuess.length);
 	
 	let messageGuessDisplay = "";
-	let index = keyIndex; //This gets created, but never used?
-	
-	console.log("keyLength", keyGuess.length)
 	
 	for (let i = 0; i < messageGuessSpaces.length; i++) {
-		console.log(i - keyIndex + 2*keyGuess.length)
-		console.log(messageGuessSpaces[i])
 		if (((i - keyIndex + 2*(keyGuess.length+1)) % (keyGuess.length + 1)) == 0) {
 			messageGuessDisplay += "<span>" + messageGuessSpaces[i] + "</span>";
 		}
@@ -122,7 +117,6 @@ function displayCipher(keyGuess, keyIndex) {
 
 function clickLetter(event) {
 	let id = event.target.id;
-	//console.log("id", id)
 	element = document.getElementById(id);
 	
 	selectedElements = document.getElementsByClassName("selected");
@@ -131,20 +125,14 @@ function clickLetter(event) {
 	}
 	
 	element.classList.add("selected");
-
-	//console.log(element.classList)
 	
 	let index = Number(id[id.length - 1])
 	let keyIndex = Number(id[9])
 	let keyGuess = keyGuesses[keyIndex]
-	//console.log("keyGuess", keyGuess)
-	//console.log("index",index)
 	
 	displayCipher(keyGuess, index);
 	
-	
 	let letterCount = {};
-	
 	totalLetters = 0;
 	
 	alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -187,11 +175,10 @@ function clickLetter(event) {
 function pageLoad() {
 	const keys = ["bench", "field", "doors"];
 	
-	key = getRandomElem(keys);
-	//key = "bench";
+	key = getRandomElem(words);
+	console.log(key)
 	messageSpaces = getRandomElem(quotes);
 	messageChars = removePunctuation(messageSpaces);
-	console.log(key);
 	cipher = encipher(messageChars, key);
 }
 
