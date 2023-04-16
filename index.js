@@ -106,19 +106,8 @@ function pageLoad() {
 	//clickLetter(cipher, "bench", 0) //temp
 }
 
-const guessRows = [
-	["","","","",""],
-	["","","","",""],
-	["","","","",""],
-	["","","","",""],
-	["","","","",""],
-	["","","","",""],
-	["","","","",""],
-	["","","","",""],
-	["","","","",""],
-	["","","","",""]
-]
-
+const guessRows = [];
+/*
 guessRows.forEach((guessRow, guessRowIndex) => {
 	const rowElement = document.createElement("div");
 	rowElement.setAttribute("id", "guessRow-" + guessRowIndex);
@@ -131,16 +120,29 @@ guessRows.forEach((guessRow, guessRowIndex) => {
 
 	tileDisplay.append(rowElement);
 })
-
-/*function addLetter(e) {
-	const tile = document.getElementById("guessRow-" + currentRow + "-tile-" +currentTile);
-	if (e.key === "Enter") {
-		console.log(phraseKey.value);
+	*/
+function createRow(e) {
+	e.preventDefault();
+	let wordGuessed = phraseKey.value;
+	const rowArray = [];
+	const rowElement = document.createElement("div");
+	rowElement.setAttribute("id", "guessRow-" + currentRow);
+//	let tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
+	for (let i = 0; i < wordGuessed.length; i++) {
+		const tileElement = document.createElement("div");
+		tileElement.setAttribute("id", "guessRow-" + currentRow + "-tile-" + currentTile);
+		tileElement.classList.add("tile");
+		tileElement.innerHTML = wordGuessed[i];
+		rowElement.append(tileElement);
+		currentTile++
 	}
-	
-	//tile.textContent = letter;
-} */
-
+	tileDisplay.append(rowElement);
+	currentTile = 0;
+	currentRow++;
+	phraseKey.value = "";
+	//guessRows.push(rowArray);
+}
+/*
 function addLetter(e) {
 	e.preventDefault();
 	if (phraseKey.value === "") {
@@ -157,7 +159,7 @@ function addLetter(e) {
 	currentRow++;
 	phraseKey.value = "";
 }
-
+	*/
 /*
 document.addEventListener("keypress", function(event) {
 	
@@ -183,4 +185,4 @@ document.addEventListener("keypress", function(event) {
 }); */
 
 window.addEventListener("load", pageLoad, false);
-submitBtn.addEventListener("click", addLetter);
+submitBtn.addEventListener("click", createRow);
