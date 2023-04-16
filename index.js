@@ -1,6 +1,9 @@
 // Delveloped from https://www.programiz.com/javascript/examples/get-random-item
+const submitBtn = document.querySelector('input[type="submit"]');
 const tileDisplay = document.querySelector(".tile-container");
 const phraseKey = document.querySelector("#keyInput");
+let currentRow = 0;
+let currentTile = 0;
 
 
 function getRandomElem(array) {
@@ -129,7 +132,6 @@ guessRows.forEach((guessRow, guessRowIndex) => {
 	tileDisplay.append(rowElement);
 })
 
-
 /*function addLetter(e) {
 	const tile = document.getElementById("guessRow-" + currentRow + "-tile-" +currentTile);
 	if (e.key === "Enter") {
@@ -139,9 +141,24 @@ guessRows.forEach((guessRow, guessRowIndex) => {
 	//tile.textContent = letter;
 } */
 
-let currentRow = 0;
-let currentTile = 0;
+function addLetter(e) {
+	e.preventDefault();
+	if (phraseKey.value === "") {
+		return;
+	}
+	let tile = document.getElementById("guessRow-" + currentRow + "-tile-" +currentTile);
+	let wordGuessed = phraseKey.value;
+	for (let i = 0; i < wordGuessed.length; i++) {
+		tile.textContent = wordGuessed[i];
+		currentTile++;
+		tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
+	}
+	currentTile = 0;
+	currentRow++;
+	phraseKey.value = "";
+}
 
+/*
 document.addEventListener("keypress", function(event) {
 	
 	
@@ -157,8 +174,13 @@ document.addEventListener("keypress", function(event) {
 		currentTile = 0;
 		currentRow++;
 	}
+<<<<<<< HEAD
 	
 	guessKey(cipher, wordGuessed)
 	
 });
+=======
+}); */
+
 window.addEventListener("load", pageLoad, false);
+submitBtn.addEventListener("click", addLetter);
