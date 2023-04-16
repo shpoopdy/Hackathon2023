@@ -19,6 +19,11 @@ img {
 	margin-bottom: 5px;
 }
 
+#theGuy {
+	width: 300px;
+	float: left;
+}
+
 h1 {
 	padding-top: 20px;
 	font-size: 45px;
