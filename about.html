@@ -13,14 +13,12 @@
         <div class="link" id="link1"><a href="index.html">Play</a></div>
         <div class="link" id="link2"><a href="about.html">About</a></div>
     </div>
-    <h1>About CipherHack</h1>
+    <h2 id="h2">About CipherHack</h1>
     <p>
-        CipherHack is an educational tool where learners can analyze how text gets encrypted based on the Vigenère cipher.<br>
-        Users of this site will be able use their knowledge of how to solve the cipher based on character frequencies to obtain the key phrase.<br>
-        To give this site a bit of a game like feel to it there is a set number of times, 10, a user can guess before they "lose".
+        CipherHack is an educational tool where learners can analyze how text is encrypted with a Vigenère cipher. Users can observe character frequencies and make assumptions in order to determine the encryption key within 10 guess. 
     </p>
-    <h1>Vigenère Cipher</h1>
-    <p>The Vigenère cipher (French pronunciation: is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword.
+    <h2>Vigenère Cipher</h1>
+    <p>The Vigenère cipher is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword.
         It employs a form of polyalphabetic substitution. 
         First described by Giovan Battista Bellaso in 1553, the cipher is easy to understand and implement, but it resisted all attempts to break it until 1863, three centuries later.<br>
         <br>
@@ -29,28 +27,28 @@
         In the 19th century, the scheme was misattributed to Blaise de Vigenère (1523–1596) and so acquired its present name.
     </p>
     <!-- This info is from David Tuttle's week 7 slides -->
-    <h1>How It Works</h1>
+    <h2>How It Works</h1>
     <p>The Vigenère cipher works in a similar way as the rotation cipher, but uses a phrase to vary the rotation based on that characters position from A.
         By doing this it essentially is using multiple rotation ciphers throughout the text.<br>
     </p>
     <div id="about-text">
         <p id="about-left">
             <b class="fakeHeader">Input</b><br>
-            Message = drink ovaltine<br>
-            Key = bench<br>
+            Message: &nbsp;drink ovaltine<br>
+            Key: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BENCH<br>
         </p>
         <p id="about-middle">
             <b class="fakeHeader">Substitution</b><br>
-            B → D<br>
-            E → R<br>
-            N → I<br>
-            C → N<br>
-            H → K<br>
+            B (2): &nbsp;d → e<br>
+            E (5): &nbsp;r → v<br>
+            N (14): i → v<br>
+            C (3): &nbsp;n → p<br>
+            H (8): &nbsp;k → r<br>
             etc...
         </p>
         <p id="about-right">
             <b class="fakeHeader">Output</b><br>
-            Cipher = Evvpr pznnajrr
+            Cipher: evvpr pznnajrr
         </p>
     </div>
     
