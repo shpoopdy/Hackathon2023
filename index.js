@@ -2,10 +2,12 @@
 const submitBtn = document.querySelector('input[type="submit"]');
 const tileDisplay = document.querySelector(".tile-container");
 const phraseKey = document.querySelector("#keyInput");
+const frequency = document.querySelector("#freq");
 let cipher = "";
 let messageSpaces = "";
 let currentRow = 0;
 let currentTile = 0;
+let attempts = 0;
 
 
 function getRandomElem(array) {
@@ -57,21 +59,25 @@ function guessKey(e) {
 	if (keyGuess.toLowerCase() == key) {
 		document.getElementById("message").innerHTML = messageSpaces;
 		createRow();
-		alert("You Won!");
+		setTimeout(() => alert("You Won!"), 0);
 	}
 	else if (words.includes(keyGuess)) {
 		createRow();
 		messageGuess = decipher(cipher, keyGuess);
 		document.getElementById("message").innerHTML = messageGuess;
+		attempts++;
 	}
 	else {
 		alert("Guesses must be dictionary words");
 	}
+
+	if (attempts === 10) {
+		setTimeout(() => alert("You LOSE!"), 0);
+	}
 }
 
-function clickLetter(cipher, keyGuess, index) {
+function clickLetter(keyGuess, index) {
 	let letterCount = {};
-	letterCount['a'] = 5
 	
 	totalLetters = 0;
 	
@@ -90,12 +96,25 @@ function clickLetter(cipher, keyGuess, index) {
 		
 		cipherIndex += keyGuess.length;
 	}
-	
+	let tableRow = document.createElement("tr");
+	frequency.innerHTML = "<tr><th id='tableHeader1'>Substitution</th><th>Frequency</th></tr>";
 	for (let i = 0; i < alphabet.length; i++) {
-		let col1 = alphabet[i] + String.fromCharCode(26) + substitution[i];
-		console.log(col1);
+		let tableRow = document.createElement("tr");
+		let tdOne = document.createElement("td");
+		let tdTwo = document.createElement("td");
+		
+		let col1 = alphabet[i] + "\u2192" + substitution[i];
+		tdOne.innerHTML = col1;
+		
 		let col2 = parseFloat(letterCount[alphabet[i]] / totalLetters * 100).toFixed(2) + "%";
-		console.log(col2);
+		if (isNaN(letterCount[alphabet[i]])) {
+			col2 = 0;
+		}
+		tdTwo.innerHTML = col2;
+		tableRow.append(tdOne);
+		tableRow.append(tdTwo);
+		frequency.append(tableRow);
+		
 	}
 }
 
@@ -109,88 +128,28 @@ function pageLoad() {
 	
 	const cipher = encipher(messageChars, key);
 	
-	//guessKey(cipher, "bench"); // temp
-	
-	//clickLetter(cipher, "bench", 0) //temp
 }
 
-const guessRows = [];
-/*
-guessRows.forEach((guessRow, guessRowIndex) => {
-	const rowElement = document.createElement("div");
-	rowElement.setAttribute("id", "guessRow-" + guessRowIndex);
-	guessRow.forEach((guess, guessIndex) => {
-		const tileElement = document.createElement("div");
-		tileElement.setAttribute("id", "guessRow-" + guessRowIndex + "-tile-" + guessIndex);
-		tileElement.classList.add("tile");
-		rowElement.append(tileElement);
-	})
-
-	tileDisplay.append(rowElement);
-})
-	*/
 function createRow() {
 	//e.preventDefault();
 	let wordGuessed = phraseKey.value;
 	const rowArray = [];
 	const rowElement = document.createElement("div");
 	rowElement.setAttribute("id", "guessRow-" + currentRow);
-//	let tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
 	for (let i = 0; i < wordGuessed.length; i++) {
 		const tileElement = document.createElement("div");
 		tileElement.setAttribute("id", "guessRow-" + currentRow + "-tile-" + currentTile);
 		tileElement.classList.add("tile");
 		tileElement.innerHTML = wordGuessed[i];
+		tileElement.addEventListener("click", () => { clickLetter(wordGuessed, currentTile)});
 		rowElement.append(tileElement);
-		currentTile++
+		currentTile++;
 	}
 	tileDisplay.append(rowElement);
 	currentTile = 0;
 	currentRow++;
 	phraseKey.value = "";
-	//guessRows.push(rowArray);
 }
-/*
-function addLetter(e) {
-	e.preventDefault();
-	if (phraseKey.value === "") {
-		return;
-	}
-	let tile = document.getElementById("guessRow-" + currentRow + "-tile-" +currentTile);
-	let wordGuessed = phraseKey.value;
-	for (let i = 0; i < wordGuessed.length; i++) {
-		tile.textContent = wordGuessed[i];
-		currentTile++;
-		tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
-	}
-	currentTile = 0;
-	currentRow++;
-	phraseKey.value = "";
-}
-	*/
-/*
-document.addEventListener("keypress", function(event) {
-	
-	
-	let tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
-	if (event.key === "Enter") {
-		let wordGuessed = phraseKey.value;
-		for (let i = 0; i < wordGuessed.length; i++) {
-			console.log(wordGuessed[i]);
-			tile.textContent = wordGuessed[i];
-			currentTile++;
-			tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
-		}
-		currentTile = 0;
-		currentRow++;
-	}
-<<<<<<< HEAD
-	
-	guessKey(cipher, wordGuessed)
-	
-});
-=======
-}); */
 
 window.addEventListener("load", pageLoad, false);
 submitBtn.addEventListener("click", guessKey);
