@@ -2,6 +2,7 @@
 const submitBtn = document.querySelector('input[type="submit"]');
 const tileDisplay = document.querySelector(".tile-container");
 const phraseKey = document.querySelector("#keyInput");
+const frequency = document.querySelector("#freq");
 let cipher = "";
 let messageSpaces = "";
 let currentRow = 0;
@@ -75,7 +76,7 @@ function guessKey(e) {
 	}
 }
 
-function clickLetter(cipher, keyGuess, index) {
+function clickLetter(keyGuess, index) {
 	let letterCount = {};
 	letterCount['a'] = 5
 	
@@ -96,11 +97,21 @@ function clickLetter(cipher, keyGuess, index) {
 		
 		cipherIndex += keyGuess.length;
 	}
-	
+	let tableRow = document.createElement("tr");
+	frequency.innerHTML = "<tr><th id='tableHeader1'>Substitution</th><th>Frequency</th></tr>";
 	for (let i = 0; i < alphabet.length; i++) {
-		let col1 = alphabet[i] + String.fromCharCode(26) + substitution[i];
+		let tableRow = document.createElement("tr");
+		let tdOne = document.createElement("td");
+		let tdTwo = document.createElement("td");
+		
+		let col1 = alphabet[i] + "\u2192" + substitution[i];
+		tdOne.innerHTML = col1;
 		console.log(col1);
 		let col2 = parseFloat(letterCount[alphabet[i]] / totalLetters * 100).toFixed(2) + "%";
+		tdTwo.innerHTML = col2;
+		tableRow.append(tdOne);
+		tableRow.append(tdTwo);
+		frequency.append(tableRow);
 		console.log(col2);
 	}
 }
@@ -128,8 +139,9 @@ function createRow() {
 		tileElement.setAttribute("id", "guessRow-" + currentRow + "-tile-" + currentTile);
 		tileElement.classList.add("tile");
 		tileElement.innerHTML = wordGuessed[i];
+		tileElement.addEventListener("click", () => { clickLetter(wordGuessed, currentTile)});
 		rowElement.append(tileElement);
-		currentTile++
+		currentTile++;
 	}
 	tileDisplay.append(rowElement);
 	currentTile = 0;
