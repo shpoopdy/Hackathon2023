@@ -49,24 +49,24 @@ function decipher(cipherChars, keyGuess) {
 		keyIndex = (keyIndex + 1) % keyGuess.length;
 	}
 	
-	//document.getElementById("message").innerHTML = message;
-	
 	return message;
 }
 
 function guessKey(e) {
 	e.preventDefault();
 	keyGuess = document.getElementById("keyInput").value.toLowerCase();
-	keyGuesses.push(keyGuess);
+	
 	if (keyGuess.toLowerCase() == key) {
 		document.getElementById("message").innerHTML = messageSpaces;
 		createRow();
+		keyGuesses.push(keyGuess);
 		setTimeout(() => alert("You Won!"), 0);
 	}
 	else if (words.includes(keyGuess)) {
 		createRow();
 		messageGuess = decipher(cipher, keyGuess);
-		document.getElementById("message").innerHTML = messageGuess;
+		document.getElementById("message").innerHTML = addSpaces(messageGuess, keyGuess.length);
+		keyGuesses.push(keyGuess);
 		attempts++;
 	}
 	else {
@@ -78,15 +78,64 @@ function guessKey(e) {
 	}
 }
 
+function addSpaces(messageGuess, keyLength) {
+	messageGuessSpaces = "";
+	let messageGuessList = messageGuess.split('');
+	
+	for (let i = 0; i < messageGuess.length; i += keyLength) {		
+		let arrayCopy = messageGuessList.slice();
+		slice = arrayCopy.slice(i, i + keyLength);
+		messageGuessSpaces += slice.join('') + " ";
+	}
+	
+	return messageGuessSpaces
+}
+
+function displayCipher(keyGuess, keyIndex) {
+	messageGuess = decipher(cipher, keyGuess);
+	messageGuessSpaces = addSpaces(messageGuess, keyGuess.length);
+	
+	let messageGuessDisplay = "";
+	let index = keyIndex;
+	
+	console.log("keyLength", keyGuess.length)
+	
+	for (let i = 0; i < messageGuessSpaces.length; i++) {
+		console.log(i - keyIndex + 2*keyGuess.length)
+		console.log(messageGuessSpaces[i])
+		if (((i - keyIndex + 2*(keyGuess.length+1)) % (keyGuess.length + 1)) == 0) {
+			messageGuessDisplay += "<span>" + messageGuessSpaces[i] + "</span>";
+		}
+		else {
+			messageGuessDisplay += messageGuessSpaces[i];
+		}
+		
+	}
+	
+	document.getElementById("message").innerHTML = messageGuessDisplay;
+}
+
 function clickLetter(event) {
 	let id = event.target.id;
-	console.log(id)
+	//console.log("id", id)
+	element = document.getElementById(id);
+	
+	selectedElements = document.getElementsByClassName("selected");
+	for (let i = 0; i < selectedElements.length; i++) {
+		selectedElements[i].classList.remove("selected");
+	}
+	
+	element.classList.add("selected");
+
+	//console.log(element.classList)
 	
 	let index = Number(id[id.length - 1])
-	let keyIndex = id[9]
+	let keyIndex = Number(id[9])
 	let keyGuess = keyGuesses[keyIndex]
-	console.log("keyGuess", keyGuess)
-	console.log("index",index)
+	//console.log("keyGuess", keyGuess)
+	//console.log("index",index)
+	
+	displayCipher(keyGuess, index);
 	
 	
 	let letterCount = {};
@@ -97,9 +146,7 @@ function clickLetter(event) {
 	substitution = decipher(alphabet, keyGuess[index]);
 	
 	cipherIndex = index;
-	console.log(cipherIndex)
 	while (cipherIndex < cipher.length) {
-		console.log(cipherIndex)
 		totalLetters += 1;
 		if (cipher[cipherIndex] in letterCount) {
 			letterCount[cipher[cipherIndex]] += 1;
@@ -120,9 +167,9 @@ function clickLetter(event) {
 		let col1 = alphabet[i] + "\u2192" + substitution[i];
 		tdOne.innerHTML = col1;
 		
-		let col2 = parseFloat(letterCount[alphabet[i]] / totalLetters * 100).toFixed(2) + "%";
+		let col2 = parseFloat(letterCount[alphabet[i]] / totalLetters * 100).toFixed(2).padStart(5,"0") + "%";
 		if (isNaN(letterCount[alphabet[i]])) {
-			col2 = "0.00%";
+			col2 = " 00.00%";
 		}
 		tdTwo.innerHTML = col2;
 		tableRow.append(tdOne);
