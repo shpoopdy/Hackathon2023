@@ -54,7 +54,7 @@ function decipher(cipherChars, keyGuess) {
 
 function guessKey(e) {
 	e.preventDefault();
-	keyGuess = document.getElementById("keyInput").value.toLowerCase();
+	keyGuess = document.getElementById("keyInput").value.toLowerCase(); //What is keyGuess? Should this be a let?
 	
 	if (keyGuess.toLowerCase() == key) {
 		document.getElementById("message").innerHTML = messageSpaces;
@@ -96,7 +96,7 @@ function displayCipher(keyGuess, keyIndex) {
 	messageGuessSpaces = addSpaces(messageGuess, keyGuess.length);
 	
 	let messageGuessDisplay = "";
-	let index = keyIndex;
+	let index = keyIndex; //This gets created, but never used?
 	
 	console.log("keyLength", keyGuess.length)
 	
@@ -183,16 +183,14 @@ function pageLoad() {
 	const keys = ["bench", "field", "doors"];
 	
 	key = getRandomElem(keys);
-	key = "bench"; // Temporary
+	//key = "bench";
 	messageSpaces = getRandomElem(quotes);
 	messageChars = removePunctuation(messageSpaces);
-	
+	console.log(key);
 	cipher = encipher(messageChars, key);
-	
 }
 
 function createRow() {
-	//e.preventDefault();
 	let wordGuessed = phraseKey.value.toLowerCase();
 	const rowArray = [];
 	const rowElement = document.createElement("div");
