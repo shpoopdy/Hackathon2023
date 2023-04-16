@@ -6,6 +6,7 @@ let cipher = "";
 let messageSpaces = "";
 let currentRow = 0;
 let currentTile = 0;
+let attempts = 0;
 
 
 function getRandomElem(array) {
@@ -57,15 +58,20 @@ function guessKey(e) {
 	if (keyGuess.toLowerCase() == key) {
 		document.getElementById("message").innerHTML = messageSpaces;
 		createRow();
-		alert("You Won!");
+		setTimeout(() => alert("You Won!"), 0);
 	}
 	else if (words.includes(keyGuess)) {
 		createRow();
 		messageGuess = decipher(cipher, keyGuess);
 		document.getElementById("message").innerHTML = messageGuess;
+		attempts++;
 	}
 	else {
 		alert("Guesses must be dictionary words");
+	}
+
+	if (attempts === 10) {
+		setTimeout(() => alert("You LOSE!"), 0);
 	}
 }
 
@@ -109,33 +115,14 @@ function pageLoad() {
 	
 	const cipher = encipher(messageChars, key);
 	
-	//guessKey(cipher, "bench"); // temp
-	
-	//clickLetter(cipher, "bench", 0) //temp
 }
 
-const guessRows = [];
-/*
-guessRows.forEach((guessRow, guessRowIndex) => {
-	const rowElement = document.createElement("div");
-	rowElement.setAttribute("id", "guessRow-" + guessRowIndex);
-	guessRow.forEach((guess, guessIndex) => {
-		const tileElement = document.createElement("div");
-		tileElement.setAttribute("id", "guessRow-" + guessRowIndex + "-tile-" + guessIndex);
-		tileElement.classList.add("tile");
-		rowElement.append(tileElement);
-	})
-
-	tileDisplay.append(rowElement);
-})
-	*/
 function createRow() {
 	//e.preventDefault();
 	let wordGuessed = phraseKey.value;
 	const rowArray = [];
 	const rowElement = document.createElement("div");
 	rowElement.setAttribute("id", "guessRow-" + currentRow);
-//	let tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
 	for (let i = 0; i < wordGuessed.length; i++) {
 		const tileElement = document.createElement("div");
 		tileElement.setAttribute("id", "guessRow-" + currentRow + "-tile-" + currentTile);
@@ -148,49 +135,7 @@ function createRow() {
 	currentTile = 0;
 	currentRow++;
 	phraseKey.value = "";
-	//guessRows.push(rowArray);
 }
-/*
-function addLetter(e) {
-	e.preventDefault();
-	if (phraseKey.value === "") {
-		return;
-	}
-	let tile = document.getElementById("guessRow-" + currentRow + "-tile-" +currentTile);
-	let wordGuessed = phraseKey.value;
-	for (let i = 0; i < wordGuessed.length; i++) {
-		tile.textContent = wordGuessed[i];
-		currentTile++;
-		tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
-	}
-	currentTile = 0;
-	currentRow++;
-	phraseKey.value = "";
-}
-	*/
-/*
-document.addEventListener("keypress", function(event) {
-	
-	
-	let tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
-	if (event.key === "Enter") {
-		let wordGuessed = phraseKey.value;
-		for (let i = 0; i < wordGuessed.length; i++) {
-			console.log(wordGuessed[i]);
-			tile.textContent = wordGuessed[i];
-			currentTile++;
-			tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
-		}
-		currentTile = 0;
-		currentRow++;
-	}
-<<<<<<< HEAD
-	
-	guessKey(cipher, wordGuessed)
-	
-});
-=======
-}); */
 
 window.addEventListener("load", pageLoad, false);
 submitBtn.addEventListener("click", guessKey);
