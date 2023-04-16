@@ -1,7 +1,7 @@
 :root {
 	--ff-primary: '';
 
-	--clr-bg: #279186;
+	--clr-bg: #E0FCFA;
 }
 
 body {
@@ -16,7 +16,7 @@ body {
 	width: 100%;
 }
 
-.gridOne {
+#gridOne {
 	overflow: hidden;
 	grid-area: gridOne;
 	border: solid 1px black;
@@ -24,17 +24,32 @@ body {
 	width: 100%;
 }
 
-.gridTwo {
+#gridTwo {
 	overflow: hidden;
 	grid-area: gridTwo;
 	background-color: #E0FCFA;
 	width: 100%;
 }
 
-.gridThree {
+#gridThree {
 	overflow: hidden;
 	grid-area: gridThree;
 	border: solid 1px black;
 	background-color: white;
 	width: 100%;
+}
+
+.tile-container div {
+	display: flex;
+}
+
+.tile-container .tile {
+	width: 62px;
+	height: 62px;
+	border: 2px solid#3a3a3c;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 2px;
 }
