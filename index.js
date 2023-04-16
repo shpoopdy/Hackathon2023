@@ -3,6 +3,7 @@ const submitBtn = document.querySelector('input[type="submit"]');
 const tileDisplay = document.querySelector(".tile-container");
 const phraseKey = document.querySelector("#keyInput");
 let cipher = "";
+let messageSpaces = "";
 let currentRow = 0;
 let currentTile = 0;
 
@@ -45,6 +46,8 @@ function decipher(cipherChars, keyGuess) {
 		keyIndex = (keyIndex + 1) % keyGuess.length;
 	}
 	
+	//document.getElementById("message").innerHTML = message;
+	
 	return message;
 }
 
@@ -52,12 +55,14 @@ function guessKey(e) {
 	e.preventDefault();
 	keyGuess = document.getElementById("keyInput").value;
 	if (keyGuess.toLowerCase() == key) {
+		document.getElementById("message").innerHTML = messageSpaces;
+		createRow();
 		alert("You Won!");
 	}
-	
-	if (words.includes(keyGuess)) {
+	else if (words.includes(keyGuess)) {
 		createRow();
 		messageGuess = decipher(cipher, keyGuess);
+		document.getElementById("message").innerHTML = messageGuess;
 	}
 	else {
 		alert("Guesses must be dictionary words");
@@ -99,8 +104,8 @@ function pageLoad() {
 	
 	key = getRandomElem(keys);
 	key = "bench"; // Temporary
-	message = getRandomElem(quotes);
-	messageChars = removePunctuation(message);
+	messageSpaces = getRandomElem(quotes);
+	messageChars = removePunctuation(messageSpaces);
 	
 	const cipher = encipher(messageChars, key);
 	
