@@ -6,14 +6,30 @@
 
 body {
 	background-color: var(--clr-bg);
-	margin: 5%;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-bottom: 5%;
 	font-family: sans-serif;
+}
+
+img {
+	width: 60px;
+	float: left;
+	margin: 10px;
+	margin-bottom: 5px;
+}
+
+h1 {
+	padding-top: 20px;
+	font-size: 45px;
+	font-weight: normal;
+	margin-bottom: 8px;
 }
 
 .content {
 	display: grid;
 	grid-template-areas: "gridOne gridTwo gridThree";
-	grid-column-gap: 15px;
+	grid-column-gap: 30px;
 	width: 100%;
 }
 
@@ -39,6 +55,7 @@ body {
 	padding-top: 0px;
 	font-size: 18px;
 	font-family: monospace;
+	overflow-wrap: break-word;
 }
 
 #gridTwo {
@@ -49,10 +66,25 @@ body {
 }
 
 #keyInput {
-	padding: 7px;
+	padding: 10px;
 	border-radius: 7px;
 	border: solid 2px #279186;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
+	font-size: 17px;
+	width: 150px;
+}
+
+#submitBtn {
+	padding: 10px;
+	border-radius: 7px;
+	border: solid 2px #0E4D40;
+	background-color: #3F5CF9;
+	color: white;
+	font-size: 17px;
+}
+
+#submitBtn:hover {
+	background-color: #649BFD;
 }
 
 #gridThree {
@@ -70,8 +102,8 @@ body {
 
 .tile-container .tile {
 	background-color: white;
-	width: 62px;
-	height: 62px;
+	width: 50px;
+	height: 50px;
 	border: 2px solid #279186;
 	border-radius: 15px;
 	box-sizing: border-box;
@@ -79,9 +111,27 @@ body {
 	justify-content: center;
 	align-items: center;
 	margin: 2px;
+	margin-bottom: 5px;
+	font-size: 20px;
 }
 
 .tile-container .tile:hover {
 	background-color: #EDEFEE;
 	border-width: 3px;
 }
+
+table {
+	padding: 10px;
+	width: 200px;
+	text-align: left;
+}
+
+.tableHeader1 {
+	padding-right: 5px;
+}
+
+th {
+	font-size: 14px;
+}
+
+

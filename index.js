@@ -28,6 +28,8 @@ function encipher(messageChars, key) {
 		keyIndex = (keyIndex + 1) % key.length;
 	}
 	
+	document.getElementById("message").innerHTML = cipher;
+	
 	return cipher;
 }
 

@@ -3,25 +3,32 @@
   <head>
     <title>CipherHack!</title>
     <meta charset="UTF-8">
+	 <script src = "words.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Asap&family=PT+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="icon" href="favicon.ico">
+	
   </head>
 
 	<body>
-    <div id="title-container"><h1>CipherHack</h1></div>
+    <div id="title-container"><img src="logo.png" alg="rotation cipher logo"><h1>CipherHack</h1></div>
     <div class="content">
-      <div id="gridOne"><h2 id="subHeading1">Quote Here</h2>
+      <div id="gridOne"><h2 id="subHeading1">Message</h2>
         <p id="message">Four score and seven years ago, we built Cal Poly Humboldt.</p>
       </div>
       <div id="gridTwo">
         <form>
-        <input id="keyInput" type="text" placeholder="PhraseKey">
+        <input id="keyInput" type="text" placeholder="Key Guess">
         <input id="submitBtn" type="submit" value="Submit"></button>
         </form>
         <div class="tile-container"></div>
       </div>
-      <div id="gridThree"><h2>Frequency Here<h2></div>
+      <div id="gridThree">
+		<table>
+		  <tr><th id="tableHeader1">Substitution</th><th>Frequency</th></tr>
+		  <tr><td>a-->b</td><td>35.43%</td></tr>
+		</table> 	
+	  </div>
     </div>
     <script src="index.js"></script>
     <script src="quote.js"></script>
