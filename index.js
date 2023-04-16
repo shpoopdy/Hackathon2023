@@ -9,6 +9,7 @@ let currentRow = 0;
 let currentTile = 0;
 let attempts = 0;
 let keyGuesses = [];
+let hasWon = false;
 
 
 function getRandomElem(array) {
@@ -54,6 +55,9 @@ function decipher(cipherChars, keyGuess) {
 
 function guessKey(e) {
 	e.preventDefault();
+	if (attempts === 10 || hasWon) {
+		return;
+	}
 	keyGuess = document.getElementById("keyInput").value.toLowerCase(); //What is keyGuess? Should this be a let?
 	
 	if (keyGuess.toLowerCase() == key) {
@@ -61,6 +65,7 @@ function guessKey(e) {
 		createRow();
 		keyGuesses.push(keyGuess);
 		setTimeout(() => alert("You Won!"), 0);
+		hasWon = true;
 	}
 	else if (words.includes(keyGuess)) {
 		createRow();
@@ -191,6 +196,9 @@ function pageLoad() {
 }
 
 function createRow() {
+	if (attempts === 10 || hasWon) {
+		return;
+	}
 	let wordGuessed = phraseKey.value.toLowerCase();
 	const rowArray = [];
 	const rowElement = document.createElement("div");

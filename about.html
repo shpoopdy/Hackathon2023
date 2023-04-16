@@ -8,8 +8,18 @@
       </head>
 <body>
     <!-- https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher -->
-    <img id="theGuy" src="vg.jpg" width="100" height="250"><h1>Vigenère</h1>
-    <a href="index.html">Play</a>
+    <div id="title-container"><img src="logo.png" alg="rotation cipher logo"><h1>CipherHack</h1></div>
+    <div id="links">
+        <div class="link" id="link1"><a href="index.html">Play</a></div>
+        <div class="link" id="link2"><a href="about.html">About</a></div>
+    </div>
+    <h1>About CipherHack</h1>
+    <p>
+        CipherHack is an educational tool where learners can analyze how text gets encrypted based on the Vigenère cipher.<br>
+        Users of this site will be able use their knowledge of how to solve the cipher based on character frequencies to obtain the key phrase.<br>
+        To give this site a bit of a game like feel to it there is a set number of times, 10, a user can guess before they "lose".
+    </p>
+    <h1>Vigenère Cipher</h1>
     <p>The Vigenère cipher (French pronunciation: is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword.
         It employs a form of polyalphabetic substitution. 
         First described by Giovan Battista Bellaso in 1553, the cipher is easy to understand and implement, but it resisted all attempts to break it until 1863, three centuries later.<br>
@@ -20,13 +30,26 @@
     </p>
     <!-- This info is from David Tuttle's week 7 slides -->
     <h1>How It Works</h1>
-    <p>The Vigenère cipher works in a similar way as the rotation cipher, but uses a phrase to vary the rotation.
+    <p>The Vigenère cipher works in a similar way as the rotation cipher, but uses a phrase to vary the rotation based on that characters position from A.
         By doing this it essentially is using multiple rotation ciphers throughout the text.<br>
-        Example:<br>
-        Message = Drink ovaltine<br>
-        Key = Bench<br>
-        Cipher = Evvpr pznnajrr
     </p>
+    <div id="about-text">
+        <p id="about-left">
+            Message = Drink ovaltine<br>
+            Key = Bench<br>
+        </p>
+        <p id="about-middle">
+            B → D<br>
+            E → R<br>
+            N → I<br>
+            C → N<br>
+            H → K<br>
+            etc...
+        </p>
+        <p id="about-right">
+            Cipher = Evvpr pznnajrr
+        </p>
+    </div>
     
 </body>
 </html>
