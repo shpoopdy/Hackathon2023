@@ -17,6 +17,7 @@ img {
 	float: left;
 	margin: 10px;
 	margin-bottom: 5px;
+	margin-left: 0px;
 }
 
 #theGuy {
@@ -39,6 +40,15 @@ h1 {
 	width: 100%;
 }*/
 
+.content {
+	margin-top: 20px;
+}
+
+
+#links {
+	margin-top: 20px;
+}
+
 #gridOne {
 	overflow: hidden;
 	grid-area: gridOne;
@@ -49,6 +59,7 @@ h1 {
 	float: left;
 	margin-right: 30px;
 	margin-bottom: 30px;
+	clear: both;
 }
 
 #message, #subHeading1 {
@@ -85,7 +96,7 @@ h1 {
 	width: 150px;
 }
 
-#submitBtn {
+#submitBtn, .link {
 	padding: 10px;
 	border-radius: 7px;
 	border: solid 2px #0E4D40;
@@ -93,6 +104,41 @@ h1 {
 	color: white;
 	font-size: 17px;
 }
+
+a {
+	color: white;
+}
+
+#links {
+	float: none;
+	margin-bottom: 10px;
+	margin-top: 0px;
+}
+
+.link {
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: 50px;
+	text-align: center;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	/*float: left;*/
+}
+
+a:link {
+	text-decoration: none;
+}
+
+#link1 {
+	float: left;
+}
+
+#link2 {
+	float: left;
+}
+
 
 #submitBtn:hover {
 	background-color: #649BFD;
@@ -106,6 +152,11 @@ h1 {
 	background-color: white;
 	float: left;
 	margin-bottom: 30px;
+}
+
+#tile-container {
+	margin-left: 0px;
+	padding-left: 0px;
 }
 
 .tile-container div {
