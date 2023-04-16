@@ -78,7 +78,6 @@ function guessKey(e) {
 
 function clickLetter(keyGuess, index) {
 	let letterCount = {};
-	letterCount['a'] = 5
 	
 	totalLetters = 0;
 	
@@ -106,13 +105,16 @@ function clickLetter(keyGuess, index) {
 		
 		let col1 = alphabet[i] + "\u2192" + substitution[i];
 		tdOne.innerHTML = col1;
-		console.log(col1);
+		
 		let col2 = parseFloat(letterCount[alphabet[i]] / totalLetters * 100).toFixed(2) + "%";
+		if (isNaN(letterCount[alphabet[i]])) {
+			col2 = 0;
+		}
 		tdTwo.innerHTML = col2;
 		tableRow.append(tdOne);
 		tableRow.append(tdTwo);
 		frequency.append(tableRow);
-		console.log(col2);
+		
 	}
 }
 
