@@ -79,7 +79,7 @@ function guessKey(e) {
 	}
 
 	if (attempts === 10) {
-		setTimeout(() => alert("You LOSE!"), 0);
+		setTimeout(() => alert("You LOSE! The correct key is " + key), 0);
 	}
 }
 
