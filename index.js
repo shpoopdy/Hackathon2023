@@ -1,6 +1,9 @@
 // Delveloped from https://www.programiz.com/javascript/examples/get-random-item
+const submitBtn = document.querySelector('input[type="submit"]');
 const tileDisplay = document.querySelector(".tile-container");
 const phraseKey = document.querySelector("#keyInput");
+let currentRow = 0;
+let currentTile = 0;
 
 
 function getRandomElem(array) {
@@ -98,9 +101,9 @@ function pageLoad() {
 	
 	let cipher = encipher(messageChars, key);
 	
-	guessKey(cipher, "bench"); // temp
+	//guessKey(cipher, "bench"); // temp
 	
-	clickLetter(cipher, "bench", 0) //temp
+	//clickLetter(cipher, "bench", 0) //temp
 }
 
 const guessRows = [
@@ -130,18 +133,24 @@ guessRows.forEach((guessRow, guessRowIndex) => {
 })
 
 
-/*function addLetter(e) {
-	const tile = document.getElementById("guessRow-" + currentRow + "-tile-" +currentTile);
-	if (e.key === "Enter") {
-		console.log(phraseKey.value);
+function addLetter(e) {
+	e.preventDefault();
+	if (phraseKey.value === "") {
+		return;
 	}
-	
-	//tile.textContent = letter;
-} */
+	let tile = document.getElementById("guessRow-" + currentRow + "-tile-" +currentTile);
+	let wordGuessed = phraseKey.value;
+	for (let i = 0; i < wordGuessed.length; i++) {
+		tile.textContent = wordGuessed[i];
+		currentTile++;
+		tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
+	}
+	currentTile = 0;
+	currentRow++;
+	phraseKey.value = "";
+}
 
-let currentRow = 0;
-let currentTile = 0;
-
+/*
 document.addEventListener("keypress", function(event) {
 	let tile = document.getElementById("guessRow-" + currentRow + "-tile-" + currentTile);
 	if (event.key === "Enter") {
@@ -155,5 +164,6 @@ document.addEventListener("keypress", function(event) {
 		currentTile = 0;
 		currentRow++;
 	}
-});
+}); */
 window.addEventListener("load", pageLoad, false);
+submitBtn.addEventListener("click", addLetter);
