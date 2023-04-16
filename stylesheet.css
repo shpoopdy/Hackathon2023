@@ -96,6 +96,10 @@ h1 {
 	width: 150px;
 }
 
+#keyInput:focus {
+	outline: none;
+}
+
 #submitBtn, .link {
 	padding: 10px;
 	border-radius: 7px;
